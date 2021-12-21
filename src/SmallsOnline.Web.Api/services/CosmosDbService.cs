@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.Azure.Cosmos;
 
 using SmallsOnline.Web.Api.Helpers;
+using SmallsOnline.Web.Api.Lib.Models;
 using SmallsOnline.Web.Api.Lib.Models.Albums;
 using SmallsOnline.Web.Api.Lib.Models.Tracks;
 
@@ -19,7 +20,10 @@ public class CosmosDbService : ICosmosDbService
     private readonly CosmosDbSerializer jsonSerializer = new(
         new()
         {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            Converters = {
+                new JsonDateTimeOffsetConverter()
+            }
         }
     );
 
