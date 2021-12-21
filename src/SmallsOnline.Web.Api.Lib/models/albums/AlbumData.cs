@@ -25,6 +25,9 @@ public class AlbumData : IAlbumData
     [JsonPropertyName("albumComments")]
     public string? Comments { get; set; }
 
+    [JsonPropertyName("albumReleaseDate")]
+    public DateTimeOffset? ReleaseDate { get; set; }
+
     [JsonPropertyName("listYear")]
     public string? ListYear { get; set; }
 }
