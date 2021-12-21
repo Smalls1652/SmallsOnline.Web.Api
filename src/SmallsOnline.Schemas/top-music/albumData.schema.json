@@ -17,7 +17,7 @@
         "albumStandoutTracks": {
             "type": "array",
             "items": {
-                "$ref": "https://datacdn.smalls.online/schemas/albumStandoutTracks.schema.json"
+                "$ref": "https://datacdn.smalls.online/schemas/top-music/albumStandoutTracks.schema.json"
             }
         },
         "albumArtUrl": {
