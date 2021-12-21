@@ -9,5 +9,6 @@ public interface IAlbumData
     string? AlbumUrl { get; set; }
     bool IsBest { get; set; }
     string? Comments { get; set; }
+    DateTimeOffset? ReleaseDate { get; set; }
     string? ListYear { get; set; }
 }
