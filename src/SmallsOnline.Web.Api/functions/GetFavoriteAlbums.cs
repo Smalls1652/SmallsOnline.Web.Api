@@ -1,3 +1,4 @@
+using SmallsOnline.Web.Api.Lib.Models;
 using SmallsOnline.Web.Api.Lib.Models.Albums;
 using SmallsOnline.Web.Api.Services;
 
@@ -35,7 +36,23 @@ public class GetFavoriteAlbums
             (AlbumData album1, AlbumData album2) => album2.IsBest.CompareTo(album1.IsBest)
         );
 
-        string albumsJson = JsonSerializer.Serialize(retrievedAlbums);
+        if (retrievedAlbums.Count > 1 && retrievedAlbums.Count != 0)
+        {
+            retrievedAlbums.Sort(
+                index: 1,
+                count: retrievedAlbums.Count - 1,
+                comparer: new AlbumReleaseDateComparer()
+            );
+        }
+
+        JsonSerializerOptions serializerOptions = new()
+        {
+            Converters = {
+                new JsonDateTimeOffsetConverter()
+            }
+        };
+
+        string albumsJson = JsonSerializer.Serialize(retrievedAlbums, serializerOptions);
 
         HttpResponseData httpRsp = httpReq.CreateResponse(
             statusCode: HttpStatusCode.OK
