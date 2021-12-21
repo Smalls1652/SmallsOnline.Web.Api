@@ -31,6 +31,10 @@ public class GetFavoriteAlbums
             listYear: year
         );
 
+        retrievedAlbums.Sort(
+            (AlbumData album1, AlbumData album2) => album2.IsBest.CompareTo(album1.IsBest)
+        );
+
         string albumsJson = JsonSerializer.Serialize(retrievedAlbums);
 
         HttpResponseData httpRsp = httpReq.CreateResponse(
