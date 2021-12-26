@@ -1,4 +1,4 @@
-using SmallsOnline.Web.Api.Lib.Models.Tracks;
+using SmallsOnline.Web.Lib.Models.FavoritesOf.Tracks;
 using SmallsOnline.Web.Api.Services;
 
 namespace SmallsOnline.Web.Api.Functions;

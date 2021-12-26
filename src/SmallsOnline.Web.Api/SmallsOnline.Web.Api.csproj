@@ -27,7 +27,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\SmallsOnline.Web.Api.Lib\SmallsOnline.Web.Api.Lib.csproj" />
+    <ProjectReference Include="..\SmallsOnline.Web.Lib\SmallsOnline.Web.Lib.csproj" />
   </ItemGroup>
 
 </Project>
