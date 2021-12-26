@@ -16,8 +16,7 @@ public class CosmosDbSerializer : CosmosSerializer
     {
         using (stream)
         {
-            if (stream.CanSeek
-                   && stream.Length == 0)
+            if (stream.CanSeek && stream.Length == 0)
             {
                 return default;
             }
@@ -33,8 +32,8 @@ public class CosmosDbSerializer : CosmosSerializer
 
     public override Stream ToStream<T>(T input)
     {
-        MemoryStream streamPayload = new MemoryStream();
-        this.systemTextJsonSerializer.Serialize(streamPayload, input, typeof(T), default);
+        MemoryStream streamPayload = new();
+        systemTextJsonSerializer.Serialize(streamPayload, input, typeof(T), default);
         streamPayload.Position = 0;
         return streamPayload;
     }
