@@ -8,6 +8,9 @@
         "id": {
             "type": "string"
         },
+        "partitionKey": {
+            "type": "string"
+        },
         "trackTitle": {
             "type": "string"
         },
