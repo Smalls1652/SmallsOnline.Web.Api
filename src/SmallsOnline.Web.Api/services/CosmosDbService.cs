@@ -13,10 +13,10 @@ public class CosmosDbService : ICosmosDbService
 {
     public CosmosDbService()
     {
-        InitService();
+        cosmosDbClient = InitService(jsonSerializer);
     }
 
-    private CosmosClient? cosmosDbClient;
+    private CosmosClient cosmosDbClient;
     private readonly CosmosDbSerializer jsonSerializer = new(
         new()
         {
@@ -87,13 +87,13 @@ public class CosmosDbService : ICosmosDbService
         return getFromDbTask.Result;
     }
 
-    private void InitService()
+    private static CosmosClient InitService(CosmosDbSerializer dbSerializer)
     {
-        cosmosDbClient = new(
+        return new(
             connectionString: AppSettings.GetSetting("CosmosDbConnectionString"),
             clientOptions: new()
             {
-                Serializer = jsonSerializer
+                Serializer = dbSerializer
             }
         );
     }
