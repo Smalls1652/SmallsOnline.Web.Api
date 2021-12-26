@@ -1,5 +1,5 @@
-using SmallsOnline.Web.Api.Lib.Models.Albums;
-using SmallsOnline.Web.Api.Lib.Models.Tracks;
+using SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
+using SmallsOnline.Web.Lib.Models.FavoritesOf.Tracks;
 
 namespace SmallsOnline.Web.Api.Services;
 

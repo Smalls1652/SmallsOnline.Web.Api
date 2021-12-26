@@ -1,4 +1,4 @@
-namespace SmallsOnline.Web.Api.Lib.Models.Albums;
+namespace SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
 
 public interface IAlbumData
 {
