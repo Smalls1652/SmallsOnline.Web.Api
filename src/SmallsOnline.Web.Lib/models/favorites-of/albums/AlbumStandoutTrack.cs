@@ -1,8 +1,8 @@
-namespace SmallsOnline.Web.Api.Lib.Models.Albums;
+namespace SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
 
 public class AlbumStandoutTrack : IAlbumStandoutTrack
 {
-    public AlbumStandoutTrack() {}
+    public AlbumStandoutTrack() { }
 
     [JsonPropertyName("trackName")]
     public string? Name { get; set; }

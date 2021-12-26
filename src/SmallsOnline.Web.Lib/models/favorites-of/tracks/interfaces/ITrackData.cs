@@ -1,4 +1,4 @@
-namespace SmallsOnline.Web.Api.Lib.Models.Tracks;
+namespace SmallsOnline.Web.Lib.Models.FavoritesOf.Tracks;
 
 public interface ITrackData
 {

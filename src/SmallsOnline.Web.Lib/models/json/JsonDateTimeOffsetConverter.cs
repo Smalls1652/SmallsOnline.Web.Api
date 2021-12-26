@@ -1,4 +1,4 @@
-namespace SmallsOnline.Web.Api.Lib.Models;
+namespace SmallsOnline.Web.Lib.Models.Json;
 
 public class JsonDateTimeOffsetConverter : JsonConverter<DateTimeOffset>
 {
