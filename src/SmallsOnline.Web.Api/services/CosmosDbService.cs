@@ -34,8 +34,8 @@ public class CosmosDbService : ICosmosDbService
             {
                 List<AlbumData> albumItems = new();
 
-                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "top-music-albums");
-                QueryDefinition query = new($"SELECT * FROM c WHERE c.listYear = \"{listYear}\"");
+                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "favorites-of");
+                QueryDefinition query = new($"SELECT * FROM c WHERE c.partitionKey = \"favorites-of-albums\" AND c.listYear = \"{listYear}\"");
 
                 FeedIterator<AlbumData> containerQueryIterator = container.GetItemQueryIterator<AlbumData>(query);
                 while (containerQueryIterator.HasMoreResults)
@@ -64,8 +64,8 @@ public class CosmosDbService : ICosmosDbService
             {
                 List<TrackData> trackItems = new();
 
-                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "top-music-tracks");
-                QueryDefinition query = new($"SELECT * FROM c WHERE c.listYear = \"{listYear}\"");
+                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "favorites-of");
+                QueryDefinition query = new($"SELECT * FROM c WHERE c.partitionKey = \"favorites-of-tracks\" AND c.listYear = \"{listYear}\"");
 
                 FeedIterator<TrackData> containerQueryIterator = container.GetItemQueryIterator<TrackData>(query);
                 while (containerQueryIterator.HasMoreResults)
