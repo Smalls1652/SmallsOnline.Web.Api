@@ -13,10 +13,10 @@ public class CosmosDbService : ICosmosDbService
 {
     public CosmosDbService()
     {
-        InitService();
+        cosmosDbClient = InitService(jsonSerializer);
     }
 
-    private CosmosClient? cosmosDbClient;
+    private CosmosClient cosmosDbClient;
     private readonly CosmosDbSerializer jsonSerializer = new(
         new()
         {
@@ -34,8 +34,8 @@ public class CosmosDbService : ICosmosDbService
             {
                 List<AlbumData> albumItems = new();
 
-                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "top-music-albums");
-                QueryDefinition query = new($"SELECT * FROM c WHERE c.listYear = \"{listYear}\"");
+                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "favorites-of");
+                QueryDefinition query = new($"SELECT * FROM c WHERE c.partitionKey = \"favorites-of-albums\" AND c.listYear = \"{listYear}\"");
 
                 FeedIterator<AlbumData> containerQueryIterator = container.GetItemQueryIterator<AlbumData>(query);
                 while (containerQueryIterator.HasMoreResults)
@@ -64,8 +64,8 @@ public class CosmosDbService : ICosmosDbService
             {
                 List<TrackData> trackItems = new();
 
-                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "top-music-tracks");
-                QueryDefinition query = new($"SELECT * FROM c WHERE c.listYear = \"{listYear}\"");
+                Container container = cosmosDbClient.GetContainer(AppSettings.GetSetting("CosmosDbContainerName"), "favorites-of");
+                QueryDefinition query = new($"SELECT * FROM c WHERE c.partitionKey = \"favorites-of-tracks\" AND c.listYear = \"{listYear}\"");
 
                 FeedIterator<TrackData> containerQueryIterator = container.GetItemQueryIterator<TrackData>(query);
                 while (containerQueryIterator.HasMoreResults)
@@ -87,13 +87,13 @@ public class CosmosDbService : ICosmosDbService
         return getFromDbTask.Result;
     }
 
-    private void InitService()
+    private static CosmosClient InitService(CosmosDbSerializer dbSerializer)
     {
-        cosmosDbClient = new(
+        return new(
             connectionString: AppSettings.GetSetting("CosmosDbConnectionString"),
             clientOptions: new()
             {
-                Serializer = jsonSerializer
+                Serializer = dbSerializer
             }
         );
     }
