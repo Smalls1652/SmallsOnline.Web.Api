@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
 
 public interface IAlbumData
@@ -6,7 +8,7 @@ public interface IAlbumData
     string? PartitionKey { get; set; }
     string? Title { get; set; }
     string? Artist { get; set; }
-    AlbumStandoutTrack[]? StandoutTracks { get; set; }
+    List<AlbumStandoutTrack> StandoutTracks { get; set; }
     string? AlbumArtUrl { get; set; }
     string? AlbumUrl { get; set; }
     bool IsBest { get; set; }

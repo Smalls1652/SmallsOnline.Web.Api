@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
 
 public class AlbumData : IAlbumData
@@ -17,7 +19,7 @@ public class AlbumData : IAlbumData
     public string? Artist { get; set; }
 
     [JsonPropertyName("albumStandoutTracks")]
-    public AlbumStandoutTrack[]? StandoutTracks { get; set; }
+    public List<AlbumStandoutTrack> StandoutTracks { get; set; }
 
     [JsonPropertyName("albumArtUrl")]
     public string? AlbumArtUrl { get; set; }
