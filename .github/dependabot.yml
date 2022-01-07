@@ -8,12 +8,3 @@ updates:
     assignees:
       - "Smalls1652"
     target-branch: "main"
-
-  - package-ecosystem: "nuget"
-    directory: "/src/SmallsOnline.Web.Api.Lib/" 
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    assignees:
-      - "Smalls1652"
-    target-branch: "main"
