@@ -1,4 +1,5 @@
 using SmallsOnline.Web.Lib.Models.FavoritesOf.Tracks;
+using SmallsOnline.Web.Lib.Models.Json;
 using SmallsOnline.Web.Api.Services;
 
 namespace SmallsOnline.Web.Api.Functions;
@@ -27,11 +28,25 @@ public class GetFavoriteTracks
     {
         _logger.LogInformation($"Trigger for '{GetType().Name}' received.");
 
-        List<TrackData> retrievedAlbums = _cosmosDbService.GetFavoriteTracksOfYear(
+        List<TrackData> retrievedTracks = _cosmosDbService.GetFavoriteTracksOfYear(
             listYear: year
         );
 
-        string tracksJson = JsonSerializer.Serialize(retrievedAlbums);
+        if (retrievedTracks.Count > 1)
+        {
+            retrievedTracks.Sort(
+                comparer: new TrackReleaseDateComparer()
+            );
+        }
+
+        JsonSerializerOptions serializerOptions = new()
+        {
+            Converters = {
+                new JsonDateTimeOffsetConverter()
+            }
+        };
+
+        string tracksJson = JsonSerializer.Serialize(retrievedTracks, serializerOptions);
 
         HttpResponseData httpRsp = httpReq.CreateResponse(
             statusCode: HttpStatusCode.OK
