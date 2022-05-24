@@ -1,22 +1,38 @@
 using Microsoft.Extensions.DependencyInjection;
 
-using SmallsOnline.Web.Api.Services;
-
 namespace SmallsOnline.Web.Api;
 
 public class Program
 {
-    public static void Main()
-    {
-        IHost host = new HostBuilder()
-            .ConfigureFunctionsWorkerDefaults()
-            .ConfigureServices(
-                services => {
-                    services.AddSingleton<ICosmosDbService, CosmosDbService>();
-                }
-            )
-            .Build();
 
-        host.Run();
+    public static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        builder.Services.AddSingleton<ICosmosDbService, CosmosDbService>();
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
     }
 }
