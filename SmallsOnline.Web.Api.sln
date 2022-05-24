@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{08257912-234
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallsOnline.Web.Api", "src\SmallsOnline.Web.Api\SmallsOnline.Web.Api.csproj", "{2E041E21-AEB9-440D-9A51-823A313F7F1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallsOnline.Web.Lib", "src\SmallsOnline.Web.Lib\SmallsOnline.Web.Lib.csproj", "{DADF2191-10ED-4226-A0E2-0F2803C8A654}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallsOnline.Web.Lib", "src\SmallsOnline.Web.Lib\src\SmallsOnline.Web.Lib\SmallsOnline.Web.Lib.csproj", "{DADF2191-10ED-4226-A0E2-0F2803C8A654}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
