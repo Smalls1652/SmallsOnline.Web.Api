@@ -6,6 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>SmallsOnline.Web.Api</PackageId>
+    <Authors>Timothy Small</Authors>
+    <Company>Smalls.Online</Company>
+    <RepositoryUrl>https://github.com/Smalls1652/SmallsOnline.Web.Api</RepositoryUrl>
+    <VersionPrefix>2022.05.00</VersionPrefix>
+    <Description>
+      The public facing API for https://smalls.online.
+    </Description>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.27.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
