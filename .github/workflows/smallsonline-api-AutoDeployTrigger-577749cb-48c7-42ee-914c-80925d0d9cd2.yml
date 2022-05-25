@@ -10,7 +10,7 @@ on:
     - '**'
     - '.github/workflows/smallsonline-api-AutoDeployTrigger-577749cb-48c7-42ee-914c-80925d0d9cd2.yml'
 
-  # Allow mannually trigger 
+  # Allow manually trigger 
   workflow_dispatch:      
 
 jobs:
@@ -19,7 +19,9 @@ jobs:
 
     steps:
       - name: Checkout to the branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
