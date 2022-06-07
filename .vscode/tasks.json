@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run API",
+            "label": "dotnet: watch",
             "type": "process",
             "command": "dotnet",
             "args": [
@@ -12,6 +12,14 @@
                 "cwd": "${workspaceFolder}/src/SmallsOnline.Web.Api/"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "dotnet: build",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build"
+            ]
         }
     ]
 }
