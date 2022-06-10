@@ -8,13 +8,8 @@ COPY ./src /source/src
 RUN dotnet restore ./src/SmallsOnline.Web.Api
 RUN dotnet publish ./src/SmallsOnline.Web.Api --configuration "Release" --runtime "linux-x64" -p:"PublishReadyToRun=true" --output /app
 
-FROM docker.io/rockylinux/rockylinux:latest
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
-
-RUN dnf upgrade -y --refresh; \
-    dnf install -y aspnetcore-runtime-6.0; \
-    dnf autoremove -y; \
-    dnf clean all
 
 COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "SmallsOnline.Web.Api.dll"]
