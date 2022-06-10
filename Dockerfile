@@ -1,12 +1,20 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM docker.io/library/fedora:latest AS build
 WORKDIR /source
 
-COPY SmallsOnline.Web.Api.sln /source/
-COPY ./src /source/src
-RUN dotnet restore SmallsOnline.Web.Api.sln
-RUN dotnet publish SmallsOnline.Web.Api.sln --configuration release --runtime "linux-x64" --output /app
+RUN dnf upgrade -y --refresh; \
+    dnf install -y dotnet-sdk-6.0
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+COPY ./src /source/src
+RUN dotnet restore ./src/SmallsOnline.Web.Api
+RUN dotnet publish ./src/SmallsOnline.Web.Api --configuration "Release" --runtime "linux-x64" -p:"PublishReadyToRun=true" --output /app
+
+FROM docker.io/rockylinux/rockylinux:latest
 WORKDIR /app
+
+RUN dnf upgrade -y --refresh; \
+    dnf install -y aspnetcore-runtime-6.0; \
+    dnf autoremove -y; \
+    dnf clean all
+
 COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "SmallsOnline.Web.Api.dll"]
