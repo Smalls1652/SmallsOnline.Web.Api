@@ -18,7 +18,9 @@ public class CosmosDbSerializer : CosmosSerializer
         {
             if (stream.CanSeek && stream.Length == 0)
             {
+                #pragma warning disable CS8603
                 return default;
+                #pragma warning restore CS8603
             }
 
             if (typeof(Stream).IsAssignableFrom(typeof(T)))
@@ -26,7 +28,7 @@ public class CosmosDbSerializer : CosmosSerializer
                 return (T)(object)stream;
             }
 
-            return (T)systemTextJsonSerializer.Deserialize(stream, typeof(T), default);
+            return (T)systemTextJsonSerializer.Deserialize(stream, typeof(T), default)!;
         }
     }
 
