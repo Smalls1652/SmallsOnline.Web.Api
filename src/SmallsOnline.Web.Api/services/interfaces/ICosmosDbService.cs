@@ -1,6 +1,3 @@
-using SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
-using SmallsOnline.Web.Lib.Models.FavoritesOf.Tracks;
-
 namespace SmallsOnline.Web.Api.Services;
 
 public interface ICosmosDbService
