@@ -9,7 +9,10 @@
                 "watch"
             ],
             "options": {
-                "cwd": "${workspaceFolder}/src/SmallsOnline.Web.Api/"
+                "cwd": "${workspaceFolder}/src/SmallsOnline.Web.Api/",
+                "env": {
+                    "ASPNETCORE_ENVIRONMENT": "Development"
+                }
             },
             "problemMatcher": "$msCompile"
         },
