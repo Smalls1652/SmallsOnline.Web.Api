@@ -10,20 +10,12 @@ public static class AppSettings
     /// </summary>
     /// <param name="settingName">The name of the setting.</param>
     /// <returns>A string value of the setting.</returns>
-    public static string GetSetting(string settingName)
+    public static string? GetSetting(string settingName)
     {
-        string settingValue;
-        try
-        {
-            settingValue = Environment.GetEnvironmentVariable(
-                settingName,
-                EnvironmentVariableTarget.Process
-            );
-        }
-        catch (ArgumentNullException e)
-        {
-            throw new Exception($"The value for setting '{settingName}' is null.", e);
-        }
+        string? settingValue = Environment.GetEnvironmentVariable(
+            settingName,
+            EnvironmentVariableTarget.Process
+        );
 
         return settingValue;
     }
