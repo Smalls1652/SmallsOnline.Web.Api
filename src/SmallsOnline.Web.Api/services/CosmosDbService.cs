@@ -1,11 +1,5 @@
-using System.Text.Json.Serialization;
-
 using Microsoft.Azure.Cosmos;
-
 using SmallsOnline.Web.Api.Helpers;
-using SmallsOnline.Web.Lib.Models.Json;
-using SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
-using SmallsOnline.Web.Lib.Models.FavoritesOf.Tracks;
 
 namespace SmallsOnline.Web.Api.Services;
 
