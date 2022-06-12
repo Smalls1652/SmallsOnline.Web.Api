@@ -3,19 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace SmallsOnline.Web.Api.Controllers;
 
 [ApiController]
-[Route("api/favoriteAlbums")]
-public class FavoriteAlbumsController : ControllerBase
+[Route("api/favoritesOf")]
+public class FavoriteOfController : ControllerBase
 {
-    private readonly ILogger<FavoriteAlbumsController> _logger;
+    private readonly ILogger<FavoriteOfController> _logger;
     private readonly ICosmosDbService _cosmosDbService;
 
-    public FavoriteAlbumsController(ILogger<FavoriteAlbumsController> logger, ICosmosDbService cosmosDbService)
+    public FavoriteOfController(ILogger<FavoriteOfController> logger, ICosmosDbService cosmosDbService)
     {
         _logger = logger;
         _cosmosDbService = cosmosDbService;
     }
 
-    [HttpGet("{year}" ,Name = "GetFavoriteAlbums")]
+    [HttpGet("albums/{year}" ,Name = "GetFavoriteAlbums")]
     public async Task<IEnumerable<AlbumData>> GetFavoriteAlbums(string year)
     {
         _logger.LogInformation("Getting favorite albums for {year}.", year);
@@ -44,5 +44,23 @@ public class FavoriteAlbumsController : ControllerBase
         };
 
         return retrievedAlbums.ToArray();
+    }
+
+    [HttpGet("tracks/{year}", Name = "GetFavoriteTracks")]
+    public async Task<IEnumerable<TrackData>> GetFavoriteTracks(string year)
+    {
+        _logger.LogInformation("Getting favorite tracks for {year}.", year);
+        List<TrackData> retrievedTracks = await _cosmosDbService.GetFavoriteTracksOfYearAsync(
+            listYear: year
+        );
+
+        if (retrievedTracks.Count > 1)
+        {
+            retrievedTracks.Sort(
+                comparer: new TrackReleaseDateComparer()
+            );
+        }
+
+        return retrievedTracks.ToArray();
     }
 }
