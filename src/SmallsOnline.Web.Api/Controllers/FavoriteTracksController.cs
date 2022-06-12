@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using SmallsOnline.Web.Lib.Models.FavoritesOf.Albums;
 
 namespace SmallsOnline.Web.Api.Controllers;
 
