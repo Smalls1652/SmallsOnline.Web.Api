@@ -16,11 +16,11 @@ public class FavoriteTracksController : ControllerBase
         _cosmosDbService = cosmosDbService;
     }
 
-    [HttpGet("{year}" ,Name = "GetFavoriteTracks")]
-    public IEnumerable<TrackData> GetFavoriteTracks(string year)
+    [HttpGet("{year}", Name = "GetFavoriteTracks")]
+    public async Task<IEnumerable<TrackData>> GetFavoriteTracks(string year)
     {
         _logger.LogInformation("Getting favorite tracks for {year}.", year);
-        List<TrackData> retrievedTracks = _cosmosDbService.GetFavoriteTracksOfYear(
+        List<TrackData> retrievedTracks = await _cosmosDbService.GetFavoriteTracksOfYearAsync(
             listYear: year
         );
 
