@@ -1,3 +1,4 @@
+using System.Collections;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SmallsOnline.Web.Api;
@@ -17,6 +18,16 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddSingleton<ICosmosDbService, CosmosDbService>();
+
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+        {
+            builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.Development.json", true)
+                .AddEnvironmentVariables();
+
+            Environment.SetEnvironmentVariable("CosmosDbConnectionString", builder.Configuration.GetValue<string>("CosmosDbConnectionString"));
+            Environment.SetEnvironmentVariable("CosmosDbContainerName", builder.Configuration.GetValue<string>("CosmosDbContainerName"));
+        }
 
         var app = builder.Build();
 
