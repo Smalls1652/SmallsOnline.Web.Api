@@ -16,6 +16,10 @@ jobs:
         with:
           submodules: true
 
+      - name: Update NuGet config file
+        shell: pwsh
+        run: Write-Output "${{ secrets.NUGET_CONFIG }}" | Out-File -FilePath ".\src\SmallsOnline.Web.Api\nuget.config" 
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
