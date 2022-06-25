@@ -4,6 +4,7 @@ WORKDIR /source
 RUN dnf upgrade -y --refresh; \
     dnf install -y dotnet-sdk-6.0
 
+COPY ./nuget.config /source/
 COPY ./src/SmallsOnline.Web.Api/ /source/
 
 RUN dotnet restore
