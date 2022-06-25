@@ -2,6 +2,10 @@ namespace SmallsOnline.Web.Api.Services;
 
 public interface ICosmosDbService
 {
+    Task<List<BlogListEntry>> GetBlogEntriesAsync(int pageNumber = 1);
+    Task<BlogEntry> GetBlogEntryAsync(string id);
+    Task<int> GetBlogTotalPagesAsync();
+
     List<AlbumData> GetFavoriteAlbumsOfYear(string listYear);
     Task<List<AlbumData>> GetFavoriteAlbumsOfYearAsync(string listYear);
     
