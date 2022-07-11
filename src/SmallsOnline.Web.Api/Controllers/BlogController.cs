@@ -21,7 +21,7 @@ public class BlogController : ControllerBase
         _logger.LogInformation("Getting blog entries.");
 
         int totalPages = await _cosmosDbService.GetBlogTotalPagesAsync();
-        List<BlogListEntry> retrievedBlogEntries = await _cosmosDbService.GetBlogEntriesAsync(pageNumber);
+        List<BlogEntry> retrievedBlogEntries = await _cosmosDbService.GetBlogEntriesAsync(pageNumber);
 
         return new()
         {
