@@ -5,15 +5,6 @@ namespace SmallsOnline.Web.Api.Services;
 
 public partial class CosmosDbService : ICosmosDbService
 {
-    public List<TrackData> GetFavoriteTracksOfYear(string listYear)
-    {
-        Task<List<TrackData>> getFromDbTask = Task.Run(async () => await GetFavoriteTracksOfYearAsync(listYear));
-
-        getFromDbTask.Wait();
-
-        return getFromDbTask.Result;
-    }
-
     /// <summary>
     /// Get the favorite tracks for a specific year.
     /// </summary>
