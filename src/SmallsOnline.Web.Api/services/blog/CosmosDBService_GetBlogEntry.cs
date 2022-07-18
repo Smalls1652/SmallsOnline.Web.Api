@@ -14,6 +14,11 @@ public partial class CosmosDbService : ICosmosDbService
             partitionKey: new("blog-entry")
         );
 
+        if (retrievedItem.Content is not null)
+        {
+            retrievedItem.Content = retrievedItem.Content.Replace("<!--more-->", "");
+        }
+
         return retrievedItem;
     }
 }
