@@ -22,6 +22,15 @@ public class Program
                 .AddJsonFile("appsettings.Development.json", true)
                 .AddEnvironmentVariables();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                    );
+            });
+
             Environment.SetEnvironmentVariable("CosmosDbConnectionString", builder.Configuration.GetValue<string>("CosmosDbConnectionString"));
             Environment.SetEnvironmentVariable("CosmosDbContainerName", builder.Configuration.GetValue<string>("CosmosDbContainerName"));
         }
