@@ -30,12 +30,23 @@ public partial class CosmosDbService : ICosmosDbService
                     StringBuilder markdownShort = new();
                     using (StringReader stringReader = new(item.Content))
                     {
-                        for (int i = 0; i < 5; i++)
+                        bool moreLineFound = false;
+                        while (!moreLineFound)
                         {
-                            string? line = await stringReader.ReadLineAsync();
-                            if (i < 4 || (i == 4 && line is not null))
+                            string? line = stringReader.ReadLine();
+
+                            if (line == "<!--more-->")
+                            {
+                                moreLineFound = true;
+                            }
+                            else if (line is not null)
                             {
                                 markdownShort.AppendLine(line);
+                            }
+                            else
+                            {
+                                moreLineFound = true;
+                                break;
                             }
                         }
                     }
