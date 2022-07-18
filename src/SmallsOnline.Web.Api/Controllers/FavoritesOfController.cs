@@ -49,13 +49,6 @@ public class FavoriteOfController : ControllerBase
             );
         }
 
-        JsonSerializerOptions serializerOptions = new()
-        {
-            Converters = {
-                new JsonDateTimeOffsetConverter()
-            }
-        };
-
         return retrievedAlbums.ToArray();
     }
 
