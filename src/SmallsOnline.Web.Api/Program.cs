@@ -1,3 +1,4 @@
+using SmallsOnline.Web.Api.Helpers;
 namespace SmallsOnline.Web.Api;
 
 public class Program
@@ -13,9 +14,6 @@ public class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
-        // Add the CosmosDB service.
-        builder.Services.AddSingleton<ICosmosDbService, CosmosDbService>();
 
         // Add development settings if environment variable 'ASPNETCORE_ENVIRONMENT' is set to 'Development'.
         if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
@@ -41,6 +39,14 @@ public class Program
             Environment.SetEnvironmentVariable("CosmosDbConnectionString", builder.Configuration.GetValue<string>("CosmosDbConnectionString"));
             Environment.SetEnvironmentVariable("CosmosDbContainerName", builder.Configuration.GetValue<string>("CosmosDbContainerName"));
         }
+
+        // Add the CosmosDB service.
+        builder.Services.AddSingleton<ICosmosDbService>(
+            cosmosDbSvc => new CosmosDbService(
+                connectionString: AppSettings.GetSetting("CosmosDbConnectionString")!,
+                containerName: AppSettings.GetSetting("CosmosDbContainerName")!
+            )
+        );
 
         var app = builder.Build();
 
