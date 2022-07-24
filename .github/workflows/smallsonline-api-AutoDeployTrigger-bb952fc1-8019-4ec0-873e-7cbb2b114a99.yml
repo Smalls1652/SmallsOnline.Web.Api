@@ -42,8 +42,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    env:
-      revisionPrefixName: ""
     
     steps:
       - name: Azure Login
@@ -52,10 +50,12 @@ jobs:
           creds: ${{ secrets.SMALLSONLINEAPI_AZURE_CREDENTIALS }}
 
 
-      - name: Set revision prefix
+      - name: Set revision suffix
+        id: set-rev-suffix
         shell: pwsh
         run: |
-          [System.Environment]::SetEnvironmentVariable("revisionPrefixName", ("${{ github.ref_name }}" -replace "\.","-"))
+          $modifiedName = "${{ github.ref_name }}" -replace "\.","-"
+          "::set-output name=SUFFIX_NAME::$($modifiedName)"
 
 
       - name: Deploy to containerapp
@@ -64,4 +64,4 @@ jobs:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
             az containerapp registry set -n smallsonline-api -g smalls-online-api --server smallsonlinecontainerreg.azurecr.io --username  ${{ secrets.SMALLSONLINEAPI_REGISTRY_USERNAME }} --password ${{ secrets.SMALLSONLINEAPI_REGISTRY_PASSWORD }}
-            az containerapp update --resource-group smalls-online-api --name smallsonline-api --image smallsonlinecontainerreg.azurecr.io/smallsonline-api:${{ github.ref_name }} --revision-suffix "${{ env.revisionPrefixName }}"
+            az containerapp update --resource-group smalls-online-api --name smallsonline-api --image smallsonlinecontainerreg.azurecr.io/smallsonline-api:${{ github.ref_name }} --revision-suffix "${{ steps.set-rev-suffix.SUFFIX_NAME }}"
