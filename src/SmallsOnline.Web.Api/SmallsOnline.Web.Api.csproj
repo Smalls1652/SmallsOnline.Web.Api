@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.31.1" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.31.2" />
     <PackageReference Include="SmallsOnline.Web.Lib" Version="2022.6.6" />
     <PackageReference Include="SmallsOnline.Web.Services.CosmosDB" Version="2022.5.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
